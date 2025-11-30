@@ -1,11 +1,10 @@
 // CPCD App
 
 #include <iostream>
-#define VERSION "0.1.1"
+#define VERSION "0.1.2"
 
 #ifdef _WIN32
 #include <windows.h>
-#include <conio.h>
 #elif __linux__
 #include <unistd.h>
 #endif

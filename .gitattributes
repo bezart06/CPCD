@@ -1,0 +1,26 @@
+* text=auto
+
+*.cpp text
+*.c   text
+*.h   text
+*.hpp text
+*.ixx text
+
+CMakeLists.txt text
+*.cmake        text
+CMakePresets.json text
+
+*.md  text
+*.txt text
+*.yml text
+*.json text
+.gitignore text
+.gitattributes text
+
+*.png binary
+*.jpg binary
+*.ico binary
+*.lib binary
+*.dll binary
+*.exe binary
+*.pdb binary

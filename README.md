@@ -2,11 +2,11 @@
 
 CPCD is a desktop application for PC designed to provide enhanced control over your operating system environment. It helps by limiting keyboard input (and potentially mouse usage in the future) and obscuring the screen, allowing for a distraction-free operational mode. Safe exit is managed via a specific keyboard shortcut.
 
-Currently, in version 0.1.1, CPCD offers core full-screen input locking functionality for **Windows**. Future development aims to expand features and include support for Linux platforms.
+Currently, in version 0.1.2, CPCD offers core full-screen input locking functionality for **Windows**. Future development aims to expand features and include support for Linux platforms.
 
 ![Logo](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/th5xamgrr6se0x5ro4g6.png)
 
-## Current Features (v0.1.1 - Windows)
+## Current Features (v0.1.2 - Windows)
 
 * **Full-Screen Lock:** Engages a mode that covers the entire screen.
 * **Keyboard Input Blocking:** Prevents most keyboard interactions while active.

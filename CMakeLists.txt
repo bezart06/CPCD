@@ -1,31 +1,29 @@
-cmake_minimum_required(VERSION 3.10)
-set(CMAKE_CXX_STANDARD 23)
+cmake_minimum_required(VERSION 3.20)
+
+set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED True)
 
-project(CPCD VERSION 0.1.1 LANGUAGES CXX)
+project(CPCD VERSION 0.1.2 LANGUAGES CXX)
 
 if(_WIN32)
     set(OS_TYPE "Windows")
-elseif(UNIX)
-    set(OS_TYPE "Unix")
-elseif(LINUX)
+elseif(UNIX AND NOT APPLE)
     set(OS_TYPE "Linux")
 endif()
 
 add_executable(CPCD WIN32 main.cpp)
 
-if(WIN32)
-    add_compile_options(/O2 /GL)
-    add_link_options(/LTCG)
+if(MSVC)
+    target_compile_options(CPCD PRIVATE /O2 /GL /W4 /utf-8)
+    target_link_options(CPCD PRIVATE /LTCG)
+    source_group(TREE ${CMAKE_CURRENT_SOURCE_DIR} FILES main.cpp)
 else()
-    add_compile_options(-O2 -march=native)
+    target_compile_options(CPCD PRIVATE -O2 -march=native)
 endif()
 
 if(WIN32)
     set_target_properties(CPCD PROPERTIES OUTPUT_NAME "CPCD")
     target_link_libraries(CPCD -static-libgcc -static-libstdc++ -static)
-elseif(LINUX)
-    set_target_properties(CPCD PROPERTIES OUTPUT_NAME "CPCD")
 endif()
 
 if(OS_TYPE STREQUAL "Windows")
@@ -37,6 +35,5 @@ elseif(OS_TYPE STREQUAL "Linux")
     add_custom_command(TARGET CPCD
             POST_BUILD
             COMMAND ${CMAKE_COMMAND} -E echo "Executable built for Linux"
-            COMMAND sudo chmod +x $<TARGET_FILE:CPCD>
     )
 endif()
