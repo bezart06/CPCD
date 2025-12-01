@@ -59,15 +59,15 @@ If you'd like to contribute code:
 ## Development Setup
 Please refer to the `README.md` file for instructions on how to set up your development environment and build the project.
 Key tools:
-* C++ Compiler (supporting C++23)
-* CMake (version 3.10 or higher)
-* (For Windows) Visual Studio or another compatible build environment.
+* **C++ Compiler** (supporting **C++20** standard)
+* **CMake** (version **3.20** or higher)
+* **Visual Studio 2022** (Recommended for Windows)
 
 ## Coding Style
 While we are still formalizing specific coding style guidelines, please try to adhere to the following general principles:
 * **Consistency:** Follow the style of the existing codebase.
 * **Readability:** Write clear, understandable, and well-commented code where necessary.
-* **C++ Standards:** The project uses C++23. Please leverage modern C++ features where appropriate.
+* **C++ Standards:** The project uses **C++20**. Please leverage modern C++ features where appropriate.
 * **Naming Conventions:** Use descriptive names for variables, functions, and classes. (e.g., `camelCase` for functions/variables, `PascalCase` for classes).
 
 *(We may adopt a tool like ClangFormat in the future. Suggestions are welcome!)*
