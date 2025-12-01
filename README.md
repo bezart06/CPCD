@@ -23,9 +23,19 @@ Currently, in version 0.1.2, CPCD offers core full-screen input locking function
 
 ## Installation
 
+### Using Visual Studio (Recommended for Windows)
+
+The project is configured for the modern Visual Studio "Open Folder" workflow.
+
+1.  Clone the repository.
+2.  Open Visual Studio 2022 (or newer).
+3.  Select **"Open a local folder"** and choose the `CPCD` folder.
+4.  Select the configuration (e.g., `x64-Release`) from the toolbar.
+5.  Select **Build > Build All**.
+
 ### From Source
 
-To build CPCD from source, you'll need a C++ compiler (supporting C++23) and CMake.
+To build CPCD from source, you'll need a C++ compiler (supporting C++20) and CMake.
 
 1.  Clone the repository:
     ```bash
