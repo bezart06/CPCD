@@ -56,7 +56,6 @@ Our development path is prioritized by complexity, ensuring a stable foundation 
     - Support for XInput devices (Xbox) and DirectInput.
 - [ ] **Advanced Monitor Control:** Software-based brightness/contrast control for external monitors (DDC/CI).
 
-
 ### Phase 3: The Visual Overhaul (The "Modern" Update)
 *Focus: Rewriting the presentation layer for a premium user experience.*
 - [ ] **Windows UI Migration:** Porting the interface to **WinUI 3** (Windows App SDK) for a modern, responsive design.
