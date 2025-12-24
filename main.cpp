@@ -1,7 +1,9 @@
 // CPCD App
 
 #include <iostream>
-#define VERSION "0.1.2"
+#include <vector>
+
+#define VERSION "0.1.4"
 
 #ifdef _WIN32
 #include <windows.h>
@@ -13,6 +15,8 @@ HHOOK hKeyboardHook;
 bool blockInput = true;
 bool rightCtrlPressed = false;
 bool rightAltPressed = false;
+
+std::vector<HWND> monitorWindows;
 
 static LRESULT CALLBACK LowLevelKeyboardProc(int nCode, WPARAM wParam, LPARAM lParam) {
     if (nCode == HC_ACTION) {
@@ -52,14 +56,40 @@ static LRESULT CALLBACK LowLevelKeyboardProc(int nCode, WPARAM wParam, LPARAM lP
 
 static LRESULT CALLBACK WindowProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam) {
     switch (uMsg) {
-        case WM_DESTROY:
-            UnhookWindowsHookEx(hKeyboardHook);
-            ShowCursor(TRUE);
-            PostQuitMessage(0);
-            return 0;
-        default:
-            return DefWindowProc(hwnd, uMsg, wParam, lParam);
+    case WM_DESTROY:
+        UnhookWindowsHookEx(hKeyboardHook);
+        ShowCursor(TRUE);
+        PostQuitMessage(0);
+        return 0;
+    default:
+        return DefWindowProc(hwnd, uMsg, wParam, lParam);
     }
+}
+
+BOOL CALLBACK MonitorEnumProc(HMONITOR hMonitor, HDC hdcMonitor, LPRECT lprcMonitor, LPARAM dwData) {
+    (void)hdcMonitor;
+    (void)lprcMonitor;
+    (void)dwData;
+
+    MONITORINFO mi = { sizeof(MONITORINFO) };
+    if (GetMonitorInfo(hMonitor, &mi)) {
+        int x = mi.rcMonitor.left;
+        int y = mi.rcMonitor.top;
+        int width = mi.rcMonitor.right - mi.rcMonitor.left;
+        int height = mi.rcMonitor.bottom - mi.rcMonitor.top;
+
+        HWND hwnd = CreateWindowEx(WS_EX_LAYERED | WS_EX_TOOLWINDOW,
+            "FullScreenClass", nullptr, WS_POPUP | WS_VISIBLE,
+            x, y, width, height, nullptr, nullptr,
+            GetModuleHandle(nullptr), nullptr);
+
+        if (hwnd) {
+            SetLayeredWindowAttributes(hwnd, 0, 255, LWA_ALPHA);
+            SetWindowPos(hwnd, HWND_TOPMOST, x, y, width, height, SWP_SHOWWINDOW);
+            monitorWindows.push_back(hwnd);
+        }
+    }
+    return TRUE;
 }
 
 static void cpcd() {
@@ -72,22 +102,14 @@ static void cpcd() {
 
     RegisterClass(&wc);
 
-    const int screenWidth = GetSystemMetrics(SM_CXSCREEN);
-    const int screenHeight = GetSystemMetrics(SM_CYSCREEN);
+    monitorWindows.clear();
 
-    HWND fullScreenWnd = CreateWindowEx(WS_EX_LAYERED | WS_EX_TOOLWINDOW,
-        "FullScreenClass", nullptr, WS_POPUP | WS_VISIBLE, 0, 0,
-        screenWidth, screenHeight, nullptr, nullptr,
-        GetModuleHandle(nullptr), nullptr);
+    EnumDisplayMonitors(nullptr, nullptr, MonitorEnumProc, 0);
 
-    if (fullScreenWnd == nullptr) {
-        std::cerr << "Failed to create window!" << std::endl;
+    if (monitorWindows.empty()) {
+        std::cerr << "Failed to create any windows!" << std::endl;
         exit(EXIT_FAILURE);
     }
-
-    SetLayeredWindowAttributes(fullScreenWnd, 0, 255, LWA_ALPHA);
-    SetWindowPos(fullScreenWnd, HWND_TOPMOST, 0, 0,
-        screenWidth, screenHeight, SWP_SHOWWINDOW);
 
     ShowCursor(FALSE);
 
@@ -101,7 +123,9 @@ static void cpcd() {
     while (GetMessage(&msg, nullptr, 0, 0)) {
         if (!blockInput) {
             ShowCursor(TRUE);
-            DestroyWindow(fullScreenWnd);
+            for (HWND hwnd : monitorWindows) {
+                DestroyWindow(hwnd);
+            }
             break;
         }
         TranslateMessage(&msg);
@@ -117,6 +141,11 @@ static void cpcd() {
 }
 
 int WINAPI WinMain( _In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance, _In_ LPSTR lpCmdLine, _In_ int nCmdShow) {
+    (void)hInstance;
+    (void)hPrevInstance;
+    (void)lpCmdLine;
+    (void)nCmdShow;
+
     cpcd();
     return 0;
 }

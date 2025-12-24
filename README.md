@@ -1,112 +1,110 @@
 <h1 align="center">CPCD</h1>
+<p align="center">
+  <b>C</b>omputer <b>P</b>ersonal <b>C</b>ontrol <b>D</b>ashboard
+</p>
 
-CPCD is a desktop application for PC designed to provide enhanced control over your operating system environment. It helps by limiting keyboard input (and potentially mouse usage in the future) and obscuring the screen, allowing for a distraction-free operational mode. Safe exit is managed via a specific keyboard shortcut.
+<p align="center">
+  A comprehensive, modern utility toolkit designed to redefine how developers and power users interact with their operating systems.
+  <br>
+  <i>Monitor. Control. Customize.</i>
+</p>
 
-Currently, in version 0.1.2, CPCD offers core full-screen input locking functionality for **Windows**. Future development aims to expand features and include support for Linux platforms.
+<div align="center">
 
-![Logo](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/th5xamgrr6se0x5ro4g6.png)
+[![License: GPL v3](https://img.shields.io/badge/License-GPLv3-darkblue.svg)](LICENSE)
+[![Platform](https://img.shields.io/badge/Platform-Windows%20%7C%20Linux-darkgreen.svg)]()
+[![Status](https://img.shields.io/badge/Status-Active%20Development-darkred.svg)]()
 
-## Current Features (v0.1.2 - Windows)
+</div>
 
-* **Full-Screen Lock:** Engages a mode that covers the entire screen.
-* **Keyboard Input Blocking:** Prevents most keyboard interactions while active.
-* **Safe Exit:** Use **Right Ctrl + Right Alt** to exit the locked mode.
+---
 
-## Demo
+## Vision
 
-*(A demonstration video will be available in future updates.)*
+**CPCD** is evolving from a simple focus tool into a universal interface for PC interaction. The goal is to provide a unified dashboard that offers:
+1.  **Deep System Insight:** Real-time telemetry on hardware, processes, and connected displays.
+2.  **Alternative Input Control:** Bridging the gap between gaming peripherals and desktop productivity.
+3.  **Cross-Platform Consistency:** A seamless experience whether you are on Windows 11 or a Wayland-based Linux distro.
 
-## Screenshots
+## Key Features (Planned & Current)
 
-*(Screenshots will be added soon to illustrate the application in action.)*
+* **🛡️ Legacy Lock Mode:** The original distraction-free full-screen blocking (currently available).
+* **⚙️ Smart Launcher:** A dedicated startup configuration window to tweak settings before the main app engages.
+* **🎮 Gamepad-as-Mouse:** Use your Xbox, PlayStation, or Switch controller to navigate the Windows desktop with precision.
+* **📊 System Telemetry:** Live data output regarding monitor states, active processes, and system resources.
+* **🎨 Modern UI:** 
+   * **Windows:** Built on **WinUI** for a native, fluent aesthetic.
+   * **Linux:** Utilizing **GTK4/Qt6** for perfect integration with modern desktop environments (Wayland support).
 
+## Roadmap
+
+Our development path is prioritized by complexity, ensuring a stable foundation before expanding into complex driver/UI integrations.
+
+### Phase 1: Foundation & Data (The "Utility" Update)
+*Focus: Internal logic, data gathering, and user configuration.*
+- [ ] **Startup Configuration Module:** Implementation of a pre-launch window to select modes and settings (e.g., choosing between "Lock Mode" or "Dashboard Mode").
+- [ ] **System Data Collector:**
+    - Detect and list all connected monitors (Resolution, Refresh Rate, HDR status).
+    - Real-time process enumeration.
+    - Basic hardware info output (CPU/RAM usage).
+
+### Phase 2: Input & Interaction (The "Control" Update)
+*Focus: Bridging hardware and software inputs.*
+- [ ] **Gamepad Input Bridge (Windows):** 
+    - Map analog sticks to mouse cursor movement.
+    - Map face buttons to Left/Right clicks and system shortcuts.
+    - Support for XInput devices (Xbox) and DirectInput.
+- [ ] **Advanced Monitor Control:** Software-based brightness/contrast control for external monitors (DDC/CI).
+
+### Phase 3: The Visual Overhaul (The "Modern" Update)
+*Focus: Rewriting the presentation layer for a premium user experience.*
+- [ ] **Windows UI Migration:** Porting the interface to **WinUI 3** (Windows App SDK) for a modern, responsive design.
+- [ ] **Dashboard Overlay:** A HUD mode that overlays system stats on top of other windows non-intrusively.
+
+### Phase 4: Cross-Platform Expansion (The "Linux" Update)
+*Focus: Porting and ecosystem integration.*
+- [ ] **Linux Port:** Native support for Linux systems.
+    - **Wayland** compatibility implementation.
+    - **UI Framework:** Adoption of GTK4 or Qt6.
+- [ ] **Package Distribution:** - `.deb` / `.rpm` packages.
+    - Flatpak support for universal installation.
+
+### Future Concepts (Ideas for v1.0+)
+- [ ] **Macro Engine:** Record and bind complex keyboard/mouse macros to Gamepad buttons.
+- [ ] **Remote Dashboard (or Companion App):** View PC stats and control media playback from a smartphone via local Wi-Fi.
+- [ ] **Plugin System:** Allow the community to write scripts to extend CPCD capabilities.
 
 ## Installation
 
-### From Source
-
-To build CPCD from source, you'll need a C++ compiler (supporting C++23) and CMake.
+### Windows
+*Currently, you can build from source using Visual Studio.*
 
 1.  Clone the repository:
     ```bash
     git clone https://github.com/bezart06/CPCD.git
-    cd CPCD\
     ```
-2.  Create a build directory and compile:
-    ```bash
-    mkdir build
-    cd build\
-    cmake ..
-    cmake --build . --config Release
-    ```
-    The executable `CPCD.exe` will be located in the `build/Release` (or `build/`) directory.
+2.  Open the folder in **Visual Studio 2022/2026**.
+3.  Select your configuration (recommend `x64-Release`) and hit **Build**.
 
-### From Releases
+*(Binaries will be available in the Releases)*
 
-Pre-compiled executables for Windows (version 0.1.0) are available on the [GitHub Releases page](https://github.com/Bezart06/CPCD/releases).
+## 🤝 Contributing
 
-## Documentation
+We are in the process of a major refactor to meet the new vision! We welcome developers interested in:
+* **C++20** & Systems Programming.
+* **WinUI / XAML** (for Windows frontend).
+* **Qt / GTK4** (for Linux frontend).
+* **Input APIs**.
 
-Basic usage instructions are provided in this README. More detailed documentation is planned for future releases.
+Please see [CONTRIBUTING.md](CONTRIBUTING.md) for details on how to get started.
 
-[![Ask DeepWiki](https://deepwiki.com/badge.svg)](https://deepwiki.com/bezart06/CPCD)
+## 📧 Feedback & Support
 
-## Contributing
+Have an idea for a feature? Found a bug?
+* Open an [Issue](https://github.com/bezart06/CPCD/issues) on GitHub.
+* Contact the maintainer: `bezart06@gmail.com`
 
-Contributions are always welcome and highly appreciated! If you'd like to contribute, please see our (soon to be created) `CONTRIBUTING.md` for guidelines.
-
-For now, you can:
-* Report bugs or suggest features by creating an issue.
-* Fork the repository and submit pull requests.
-
-Please adhere to our project's Code of Conduct (link to be added).
-
-## Authors
-
-- [@bezart06](https://www.github.com/bezart06)
-
-## Feedback
-
-If you have any feedback, please reach out at bezart06@gmail.com or by opening an issue on GitHub.
-
-## Roadmap
-
-🟩 Version 0.1.X (*First Stable Minor Release* - **Current Version**)
-
-🟨 Version 0.2.0 (*Interface and Usability Update*)
-- Planned features:
-    - Adding the ability to exit full-screen mode via a customizable keyboard shortcut.
-    - Appearance of a notification when attempting to exit full-screen mode.
-    - Implementation of a customization block for changing the exit shortcut.
-
-❌ Version 0.3.0 (*Linux Support*)
-- Planned features:
-    - Implementation of full-screen mode with keyboard locking and support on Linux.
-    - Addition of action logging to analyse program performance.   
-    - Extended installation and configuration documentation for Linux.
-
-❌ Version 0.4.0 (*Interactive Screen Control*).
-- Planned features:
-    - Support for application blacklist customization — ability to block switching to specific applications in full screen mode (e.g., blocking access to Task Manager).
-    - Full-featured system notifications display in full-screen mode.
-    - Customize full-screen window transparency.
-
-❌ Version 1.0.0 (*First Stable Major Release*)
-
-❌ Version 1.1.0 (*Advanced Security Settings*)
-- Planned features:
-    - Implementation of locking system commands (e.g. Ctrl + Alt + Del on Windows).
-    - Password protection for entering/exiting full screen mode.
-
-❌ Version 1.X.0 (*Reports and analytics*).
-- Planned features:
-    - Automatic generation of reports on time spent in full screen mode.
-    - Statistics of keystrokes in locked state (for analyzing performance).
-    - Export reports in PDF format.
-
-❌ Version X.X.0 (*Full-featured Work ECS*)
-- Planned features:
-    - Built-in support for remote control via companion app (e.g., full screen control via smartphone or other PC).
-    - Extended user role system with different access levels.
-    - Full workspace customization via configuration files.
-
+---
+<p align="center">
+  <i>CPCD is open-source software licensed under the <a href="LICENSE">GPLv3 License</a>.</i>
+</p>

@@ -3,7 +3,7 @@ cmake_minimum_required(VERSION 3.20)
 set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED True)
 
-project(CPCD VERSION 0.1.2 LANGUAGES CXX)
+project(CPCD VERSION 0.1.4 LANGUAGES CXX)
 
 if(_WIN32)
     set(OS_TYPE "Windows")
